@@ -112,7 +112,9 @@ class CI_Controller
             } else {
                 if (empty($user_data) || !isset($user_data['user_name'])) {
                     if (!IS_AJAX) {
-                        header('location:/login');
+                        if (strtolower($method) != 'getticket' || strtolower($method) != 'gettime') {
+                            header('location:/login');
+                        }
                     } else {
                         $msg = 'Please Login Agian';
                         exit(json_encode(['status' => FALSE, 'message' => $msg]));
